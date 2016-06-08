@@ -1,0 +1,226 @@
+-- BD Site -> http://lanchistema.16mb.com/FINAL/ 
+
+
+-- phpMyAdmin SQL Dump
+-- version 3.5.2.2
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tempo de Geração: 30/05/2016 às 15:23:04
+-- Versão do Servidor: 10.0.20-MariaDB-log
+-- Versão do PHP: 5.2.17
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Banco de Dados: `u681500055_lanx`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `cupom`
+--
+
+CREATE TABLE IF NOT EXISTS `cupom` (
+  `cupom_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cupom_numcupom` int(11) NOT NULL,
+  PRIMARY KEY (`cupom_id`),
+  UNIQUE KEY `cupom_numcupom` (`cupom_numcupom`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+
+--
+-- Extraindo dados da tabela `cupom`
+--
+
+INSERT INTO `cupom` (`cupom_id`, `cupom_numcupom`) VALUES
+(7, 7),
+(6, 6),
+(5, 5),
+(4, 4),
+(3, 3),
+(2, 2),
+(1, 1),
+(8, 8),
+(9, 9),
+(10, 10),
+(36, 11),
+(37, 332),
+(38, 45343),
+(39, 432234);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `pontuacao`
+--
+
+CREATE TABLE IF NOT EXISTS `pontuacao` (
+  `pontuacao_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pontuacao_prato_id` int(11) NOT NULL,
+  `pontuacao_ponto` int(11) NOT NULL,
+  PRIMARY KEY (`pontuacao_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=122 ;
+
+--
+-- Extraindo dados da tabela `pontuacao`
+--
+
+INSERT INTO `pontuacao` (`pontuacao_id`, `pontuacao_prato_id`, `pontuacao_ponto`) VALUES
+(121, 2, 7),
+(120, 3, 9),
+(119, 2, 2),
+(118, 10, 10),
+(117, 8, 9),
+(116, 2, 6),
+(115, 3, 10),
+(114, 3, 8),
+(113, 2, 6),
+(112, 3, 10),
+(111, 2, 8),
+(110, 3, 8),
+(109, 3, 9),
+(108, 8, 9),
+(107, 3, 9),
+(106, 3, 9),
+(105, 3, 9),
+(104, 3, 9),
+(103, 3, 8),
+(102, 12, 9),
+(101, 12, 9),
+(100, 12, 6),
+(99, 12, 9),
+(98, 12, 9),
+(97, 12, 9),
+(96, 12, 9),
+(95, 12, 9),
+(94, 12, 8),
+(93, 2, 9),
+(92, 12, 9),
+(91, 8, 8),
+(90, 1, 7),
+(89, 2, 8),
+(88, 1, 7),
+(87, 1, 4),
+(86, 1, 8),
+(85, 2, 8),
+(84, 2, 9),
+(83, 2, 8),
+(82, 3, 9),
+(81, 3, 10),
+(80, 3, 8),
+(79, 3, 8),
+(78, 3, 9),
+(77, 3, 9),
+(76, 3, 9),
+(75, 11, 9),
+(74, 3, 8),
+(73, 3, 10),
+(72, 3, 10),
+(71, 2, 8),
+(70, 10, 8),
+(69, 10, 9),
+(68, 1, 8),
+(67, 2, 9),
+(66, 3, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `prato`
+--
+
+CREATE TABLE IF NOT EXISTS `prato` (
+  `prato_id` int(11) NOT NULL AUTO_INCREMENT,
+  `prato_desc` varchar(100) NOT NULL,
+  `prato_ingredientes` varchar(100) NOT NULL,
+  `prato_nome` varchar(50) NOT NULL,
+  `prato_linkfoto` varchar(600) NOT NULL,
+  PRIMARY KEY (`prato_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Extraindo dados da tabela `prato`
+--
+
+INSERT INTO `prato` (`prato_id`, `prato_desc`, `prato_ingredientes`, `prato_nome`, `prato_linkfoto`) VALUES
+(2, 'Lasanha mineira', 'Tomate Queijo Carne moida', 'Lasanha', 'http://cmst.16mb.com/lasanha.jpg'),
+(3, 'Pizza dos sonhos', 'Queijo, Milho, Presunto e tudo o que imaginar', 'Pizza Quatro Sonhos', 'http://cmst.16mb.com/pizza.jpg'),
+(10, 'X Tudao', 'Dois Hamburgeres Alface Quejo molho especial cebola picles e um pão com gergelim', 'Hamburguer', 'http://cmst.16mb.com/hamburger.jpg'),
+(12, 'Panquecas de morango', 'Massa de trigo, morango, leite', 'Panqueca Doce', 'http://goo.gl/BrBaBB'),
+(8, 'Light Salada', 'Alho Cebola Alface tomate Molho', 'Salada', 'http://cmst.16mb.com/salada.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `promocao`
+--
+
+CREATE TABLE IF NOT EXISTS `promocao` (
+  `promo_id` int(11) NOT NULL AUTO_INCREMENT,
+  `promo_desc` varchar(50) NOT NULL,
+  `promo_numcupom` int(11) NOT NULL,
+  `promo_pratoId` int(11) NOT NULL,
+  `utilizado` int(11) DEFAULT NULL,
+  PRIMARY KEY (`promo_id`),
+  UNIQUE KEY `promo_numcupom` (`promo_numcupom`),
+  KEY `promo_pratoId` (`promo_pratoId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+
+--
+-- Extraindo dados da tabela `promocao`
+--
+
+INSERT INTO `promocao` (`promo_id`, `promo_desc`, `promo_numcupom`, `promo_pratoId`, `utilizado`) VALUES
+(10, 'Vale 2 pizza', 6, 3, NULL),
+(11, 'Vale uma Coca na compra de 1 camarao', 2, 3, 1),
+(12, 'Teste', 3, 2, 1),
+(13, 'teste332', 332, 3, NULL),
+(14, 'testeFInal', 1, 8, 1),
+(15, 'Editado ok', 11, 12, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `usuarios`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `usu_nome` varchar(35) NOT NULL,
+  `usu_email` varchar(50) NOT NULL,
+  `usu_senha` varchar(8) NOT NULL,
+  `usu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `blok` int(11) DEFAULT NULL,
+  PRIMARY KEY (`usu_id`),
+  UNIQUE KEY `usu_email` (`usu_email`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+
+--
+-- Extraindo dados da tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`usu_nome`, `usu_email`, `usu_senha`, `usu_id`, `blok`) VALUES
+('user', 'user', 'user', 15, 0),
+('usuarioteste', 'usuarioteste@usuarioteste.com', 'usuariot', 14, 0),
+('admin', 'admin@admin.com', 'admin', 13, 0),
+('Thiagao', 'thiago@flexhouse.net', '998', 12, 0),
+('thiago', 'thiago@thiago.com', 'thiago', 11, NULL),
+('carlos', 'carlos', 'carlos', 10, NULL),
+('Carlos Tavares', 'carloscrls@hotmail.com', 'teste', 16, NULL),
+('carlao', 'carlao@hotmail.com', 'carlao', 19, NULL),
+('carlos tavares', 'carloscrls@hotmail.com.br', 'dd', 17, NULL),
+('gs', 'gs@gs.com', 'gs', 18, NULL),
+('Daniely', 'daniely.rg@hotmail.com', '1234', 20, NULL),
+('Joice Alves', 'joice@joice.com.br', '1234', 21, NULL);
+
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
